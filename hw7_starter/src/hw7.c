@@ -60,7 +60,7 @@ matrix_sf* add_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
     //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
     //name is needed from create matrice sf
-    res_mat->name=name;
+    res_mat->name='?';
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
     //Loop through all elements in order to fill the res  matrix. Use of unsigned int in loops to prevent compiler complants.
@@ -81,7 +81,7 @@ matrix_sf* mult_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
     //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
     //name is needed from create matrice sf
-    res_mat->name=name;
+    res_mat->name='?';
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
     //Loop through all elements in order to fill the res  matrix. Use of unsigned int in loops to prevent compiler complants.
@@ -108,7 +108,7 @@ matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
     //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
     //name is needed from create matrice sf
-    res_mat->name=name;
+    res_mat->name='?';
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
 
@@ -202,10 +202,10 @@ char* infix2postfix_sf(char *infix) {
             res[index++]=c;
         }
         else if(c=='('){
-            push(s,c);
+            push(&s,c);
         }
         else if (c==')'){
-            //check the top 0f stack to be (, if it isnt then pop the char to res. Once it is (. just discard it.
+            //check the top of stack to be (, if it isnt then pop the char to res. Once it is (. just discard it.
             while(peek(&s)!='('){
                 res[index++]=pop(&s);
             }
@@ -213,22 +213,31 @@ char* infix2postfix_sf(char *infix) {
             pop(&s);
 
         }
+        
         else if(c=='+'){
-            while(!is_empty(s)&&(peek(&s)!='(')&&(prec(peek&s)).=prec(c)){
-                pop(s);
+            while(!is_empty(&s)&&(peek(&s)!='(')&&(prec(peek(&s))>=prec(c))){
+                res[index++]=pop(&s);
             }
-            push(s,c);
+            push(&s,c);
         }
         else if (c=='*'){
-
+            while(!is_empty(&s)&&(peek(&s)!='(')&&(prec(peek(&s))>=prec(c))){
+                res[index++]=pop(&s);
+            }
+            push(&s,c);
         }
         
     }
-    pop(s);
-    res+='\0';
+    while(!is_empty(&s)){
+        res[index++]=pop(&s);
+    }
+    res[index]='\0';
 
     return res;
 }
+
+//evaluate helpers
+
 
 matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
     return NULL;
