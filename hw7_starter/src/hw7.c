@@ -37,6 +37,16 @@ matrix_sf* find_bst_sf(char name, bst_sf *root) {
 }
 
 void free_bst_sf(bst_sf *root) {
+    //base case to stop when everything is freed
+    if(root==NULL){
+        return;
+    }
+    //free left child, thhen free right child, then free node, thhen free root.
+    free_bst_sf(root->left_child);
+    free_bst_sf(root->right_child);
+    free(root->mat);
+    free(root);
+
 }
 
 //Matrix Addition of Matrices of same size
