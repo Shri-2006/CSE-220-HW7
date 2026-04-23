@@ -15,24 +15,50 @@ void free_bst_sf(bst_sf *root) {
 matrix_sf* add_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
     //setting up column pointers, unsigned int used to adjust per system
     unsigned int num_cols=mat1->num_cols;
-    unsigned int num_rows=mat2->num_rows;
+    unsigned int num_rows=mat1->num_rows;
     
     //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
+    //name is needed from create matrice sf
+    res_mat->name='?';//adjusted based on copy_matrix
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
-    //Loop through all elements in order to fill the res  matrix
-    for (int i =0;i<num_rows;i++){
-        for (int j=0;j<num_cols;j++){
-            int x=(num_cols*i)+j;
-            res_mat->values[i]=(mat1->values[x])+(mat2->values[x]);
+    //Loop through all elements in order to fill the res  matrix. Use of unsigned int in loops to prevent compiler complants.
+    for (unsigned int i =0;i<num_rows;i++){
+        for (unsigned int j=0;j<num_cols;j++){
+            unsigned int x=(num_cols*i)+j;
+            res_mat->values[x]=(mat1->values[x])+(mat2->values[x]);
         }
     }
     return res_mat;
 }
 
 matrix_sf* mult_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
-   return NULL;
+   //setting up column pointers, unsigned int used to adjust per system
+    unsigned int num_cols=mat2->num_cols;
+    unsigned int num_rows=mat1->num_rows;
+    
+    //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
+    matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
+    //name is needed from create matrice sf
+    res_mat->name='?';//named based on copy_matrix
+    res_mat->num_rows=num_rows;
+    res_mat->num_cols=num_cols;
+    //Loop through all elements in order to fill the res  matrix. Use of unsigned int in loops to prevent compiler complants.
+    for (unsigned int i =0;i<num_rows;i++){
+        for (unsigned int j=0;j<num_cols;j++){
+            for(unsigned int k=0;k<(mat1->num_cols);k++){
+                unsigned int x=(num_cols*i)+j;
+                res_mat->values[x]=0;
+                int val1= mat1->values[i*mat1->num_cols+k]
+                int val2=mat2 ->values[mat2*k->num_cols+j]
+                res_mat->values[i*num_cols+j]+=(val1)*(val2)
+                res_mat->values[x]=(mat1->values[x])+(mat2->values[x]);
+            }
+            
+        }
+    }
+    return res_mat;
 }
 
 matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
