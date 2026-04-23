@@ -5,22 +5,35 @@ bst_sf* insert_bst_sf(matrix_sf *mat, bst_sf *root) {
         //insertt new node
         bst_sf *node=malloc(sizeof(bst_sf));
         node-> mat =mat;
-        node->left_leaf=NULL;
-        node->right_leaf=NULL;
+        node->left_child=NULL;
+        node->right_child=NULL;
         return node;
     }
     //if there is no leaf child at the node, create a left leaf. else create right leaf
     else if (mat->name< (root->mat->name)){
-        root->left_leaf=insert_bst_sf(mat,(root->left_leaf));
+        root->left_child=insert_bst_sf(mat,(root->left_child));
     }
     else{
-        root ->right_leaf=insert_bst_sf(mat,(root->right_leaf));
+        root ->right_child=insert_bst_sf(mat,(root->right_child));
     }
     return root;
 }
 
 matrix_sf* find_bst_sf(char name, bst_sf *root) {
-    return NULL;
+    //if no root, return null. if name is the node, return node. else if name is less than node, go left. else go right
+    if(root==NULL){
+        return NULL;
+    }
+    else if (name==root->mat->name){
+        return root->mat;
+    }
+    else if (name<root->mat->name){
+        return (find_bst_sf(name, (root->left_child)));
+    }
+    else{
+        return(find_bst_sf(name, (root->right_child)));
+    }
+   
 }
 
 void free_bst_sf(bst_sf *root) {
