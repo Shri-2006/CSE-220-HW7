@@ -1,3 +1,4 @@
+//Shriyans Singh 114807762
 #include "hw7.h"
 #define SIZE 300
 
