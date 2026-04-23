@@ -184,8 +184,48 @@ int prec(char c){
 
 
 char* infix2postfix_sf(char *infix) {
-    res=malloc(strlen(infix)+1);
+    stack s;
+    s.up=-1;
+    char *res=malloc(strlen(infix)+1);
+    int index=0;
+    for(int i=0;(infix[i]!='\0');i++){
+        char c=infix[i];
+        if(c== ' '){
+            continue; //Skip if space
+        }
+        //if it is a matrix name it goes to the ooutput directly
+        else if (isupper(c)){
+            res[index++]=c;
+        }
+        //if its a slash it goes straight to output, not sure about the 2 ' after the \ but vscode is companning
+        else if(c=='\''){
+            res[index++]=c;
+        }
+        else if(c=='('){
+            push(s,c);
+        }
+        else if (c==')'){
+            //check the top 0f stack to be (, if it isnt then pop the char to res. Once it is (. just discard it.
+            while(peek(&s)!='('){
+                res[index++]=pop(&s);
+            }
+            
+            pop(&s);
 
+        }
+        else if(c=='+'){
+            while(!is_empty(s)&&(peek(&s)!='(')&&(prec(peek&s)).=prec(c)){
+                pop(s);
+            }
+            push(s,c);
+        }
+        else if (c=='*'){
+
+        }
+        
+    }
+    pop(s);
+    res+='\0';
 
     return res;
 }
