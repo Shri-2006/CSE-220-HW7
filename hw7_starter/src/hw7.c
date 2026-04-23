@@ -1,4 +1,5 @@
 #include "hw7.h"
+#define SIZE 300
 
 bst_sf* insert_bst_sf(matrix_sf *mat, bst_sf *root) {
     if(root==NULL){
@@ -58,7 +59,7 @@ matrix_sf* add_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
     //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
     //name is needed from create matrice sf
-    res_mat->name='?';//adjusted based on copy_matrix
+    res_mat->name=name;
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
     //Loop through all elements in order to fill the res  matrix. Use of unsigned int in loops to prevent compiler complants.
@@ -79,7 +80,7 @@ matrix_sf* mult_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
     //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
     //name is needed from create matrice sf
-    res_mat->name='?';//named based on copy_matrix
+    res_mat->name=name;
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
     //Loop through all elements in order to fill the res  matrix. Use of unsigned int in loops to prevent compiler complants.
@@ -106,7 +107,7 @@ matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
     //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
     //name is needed from create matrice sf
-    res_mat->name='?';//adjusted based on copy_matrix
+    res_mat->name=name;
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
 
@@ -122,11 +123,70 @@ matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
 }
 
 matrix_sf* create_matrix_sf(char name, const char *expr) {
-    return NULL;
+    unsigned int num_cols;
+    unsigned int num_rows;
+    sscanf(expr,"%u %u",&num_rows,&num_cols);
+    matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
+    res_mat->name=name;
+    res_mat->num_rows=num_rows;
+    res_mat->num_cols=num_cols;
+
+    //skip the [ to start matrix
+    const char *ptr=strchr(expr,'[')+1;
+    for(unsigned int i=0;i<num_rows;i++){
+        for(unsigned int j=0;j<num_cols;j++){
+            //While space or semi skip, else add to matrice (assuming all inputs are valid)
+            while((*ptr==' '|| *ptr==';')==1){
+                ptr++;
+            }
+            int pos;
+            int new_chars;
+            sscanf(ptr,"%d%n",&pos,&new_chars);
+            res_mat->values[i*num_cols+j]=pos;
+            ptr+=new_chars;
+            
+        }
+    }
+    return res_mat;
 }
 
+//Helpers for infix2postfix_sf
+typedef struct{
+    char data[SIZE];
+    int up;
+}stack;
+
+void push(stack *s,char c){
+    s->data[++s->up]=c;
+}
+char pop(stack *s){
+    return (s->data[s->up--]);
+}
+char peek(stack *s){
+    return (s->data[s->up]);
+}
+int is_empty(stack *s){
+    return (s->up==-1);
+}
+
+int prec(char c){
+    if(c=='+'){
+        return 1;
+    }
+    else if (c=='*'){
+        return 2;
+    }
+    else{
+        return 0;
+    }
+}
+
+
 char* infix2postfix_sf(char *infix) {
-    return NULL;
+    res=malloc(strlen(infix)+1);
+
+
+    return res;
 }
 
 matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
