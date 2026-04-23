@@ -12,7 +12,21 @@ void free_bst_sf(bst_sf *root) {
 }
 
 matrix_sf* add_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
-    return NULL;
+    
+    //allocate memory to res_mat so it can handle the new array - took alot of time figuing out the malloc writing
+    matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
+    //Loop through all elements in order to fill the sum  matrix
+    for (int i =0;i<num_rows;i++){
+        for (int j=0;j<num_cols;j++){
+            int x=(num_cols*i)+j;
+            res_mat->sum[i]=(mat1->sum[x])+(mat2->sum[x]);
+        }
+    }
+
+
+
+
+    return res_mat;
 }
 
 matrix_sf* mult_mats_sf(const matrix_sf *mat1, const matrix_sf *mat2) {
