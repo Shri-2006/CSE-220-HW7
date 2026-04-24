@@ -236,11 +236,44 @@ char* infix2postfix_sf(char *infix) {
     return res;
 }
 
-//evaluate helpers
-
+//evaluate structure
+typedef struct{
+    matrix_sf *arr[SIZE];
+    int up;
+}Stack;
 
 matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
-    return NULL;
+    //convert to postfix format and initialize empty stack
+    char *post_format=infix2postfix_sf(expr);
+    Stack s;
+    //-1 means empty stack
+    s.up=-1;
+    //processing char until null terminator
+    for(int i=0;post_format[i]!='\0';i++){
+        char c=post_format[i];
+        //If P is there, push else if its transpose, push pop top element, create new matrix, and push new matrix into stack, else if * or +, pop top 2, create new matrix with sum, push into stack
+        if(isupper(c)){
+            push(&s,c);
+        }
+        else if (c=='\''){
+            pop(&s);
+            push(transpose_mat_sf(s));
+        }
+        else if(c=='*'){
+            for(i=0;i<2;i++){
+                pop(&s);
+            }
+            push(add_mats_sf(s,s));
+            if(name=='?'){
+                free(s);
+            }
+
+        }
+        matrix_sf *result =pop(&s);
+        res->name=name;
+        free(post_format);
+        return res;
+    }
 }
 
 matrix_sf *execute_script_sf(char *filename) {
