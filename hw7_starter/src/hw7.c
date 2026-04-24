@@ -115,8 +115,8 @@ matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
     //Loop through all elements in order to fill the res  matrix. Use of unsigned int in loops to prevent compiler complants.
     for (unsigned int i =0;i<num_rows;i++){
         for (unsigned int j=0;j<num_cols;j++){
-            unsigned int x=(num_cols*j)+i;
-            unsigned int y=(num_rows*i)+j;
+            unsigned int x=(num_cols*i)+j;
+            unsigned int y=(num_rows*j)+i;
             res_mat->values[x]=(mat->values[y]);
         }
     }

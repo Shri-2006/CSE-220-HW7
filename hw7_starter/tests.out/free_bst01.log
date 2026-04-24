@@ -1,0 +1,13 @@
+==192425== Memcheck, a memory error detector
+==192425== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==192425== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==192425== Command: ./bin/free_bst01
+==192425== 
+==192425== 
+==192425== HEAP SUMMARY:
+==192425==     in use at exit: 0 bytes in 0 blocks
+==192425==   total heap usage: 6 allocs, 6 frees, 108 bytes allocated
+==192425== 
+==192425== All heap blocks were freed -- no leaks are possible
+==192425== 
+==192425== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
