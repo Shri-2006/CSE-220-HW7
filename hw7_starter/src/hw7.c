@@ -126,6 +126,7 @@ matrix_sf* transpose_mat_sf(const matrix_sf *mat) {
 matrix_sf* create_matrix_sf(char name, const char *expr) {
     unsigned int num_cols;
     unsigned int num_rows;
+    //get dimensions through sscanf
     sscanf(expr,"%u %u",&num_rows,&num_cols);
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
     res_mat->name=name;
@@ -142,6 +143,7 @@ matrix_sf* create_matrix_sf(char name, const char *expr) {
             }
             int pos;
             int new_chars;
+            //store amount of char used, and moves pointer by that
             sscanf(ptr,"%d%n",&pos,&new_chars);
             res_mat->values[i*num_cols+j]=pos;
             ptr+=new_chars;
@@ -153,23 +155,27 @@ matrix_sf* create_matrix_sf(char name, const char *expr) {
 
 //Helpers for infix2postfix_sf
 typedef struct{
-    char data[SIZE];
+    //char storage
+    char stor[SIZE];
     int up;
 }stack;
-
+//push to stack
 void push(stack *s,char c){
-    s->data[++s->up]=c;
+    s->stor[++s->up]=c;
 }
+//pop and reutrn top char
 char pop(stack *s){
-    return (s->data[s->up--]);
+    return (s->stor[s->up--]);
 }
+//returns top char
 char peek(stack *s){
-    return (s->data[s->up]);
+    return (s->stor[s->up]);
 }
+//boolean to check if true or false (1==empty,0==notempty)
 int is_empty(stack *s){
     return (s->up==-1);
 }
-
+//precende of operators 
 int prec(char c){
     if(c=='+'){
         return 1;
@@ -213,7 +219,7 @@ char* infix2postfix_sf(char *infix) {
             pop(&s);
 
         }
-        
+        // before pushing char pop that which has greater than or = precednce.
         else if(c=='+'){
             while(!is_empty(&s)&&(peek(&s)!='(')&&(prec(peek(&s))>=prec(c))){
                 res[index++]=pop(&s);
@@ -228,6 +234,7 @@ char* infix2postfix_sf(char *infix) {
         }
         
     }
+    //put all that is left in stack to the output
     while(!is_empty(&s)){
         res[index++]=pop(&s);
     }
@@ -246,7 +253,7 @@ typedef struct{
 //helper for evaluate_expr_sf
 //push matrix into stack
 void m_pusher(Stack *s, matrix_sf *m){
-    s->arr[++s->up]=,;
+    s->arr[++s->up]=m;
 }
 //pop matrix from stack
 matrix_sf* m_pop(Stack *s){
@@ -289,12 +296,12 @@ matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
             }
             m_pusher(&s,res);
         }
-        //same as *
+        //same as * but with add instead of mult
         else if(c=='+'){
             //pop right, then left, multiply, then free the old mats and push new mat to s
             matrix_sf *mat2=m_pop(&s);
             matrix_sf *mat1=m_pop(&s);
-            matrix_sf *res=mult_mats_sf(mat1,mat2);
+            matrix_sf *res=add_mats_sf(mat1,mat2);
             if(!isupper(mat1->name)){
                 free(mat1);
             }
@@ -303,17 +310,81 @@ matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
             }
             m_pusher(&s,res);
         }
-        
-        matrix_sf *result =pop(&s);
-        res->name=name;
-        free(post_format);
-        return res;
     }
+    matrix_sf *res =m_pop(&s);
+    res->name=name;
+    free(post_format);
+    return res;
 }
 
+
+
+
+
+
+//Takes name of filename, 
 matrix_sf *execute_script_sf(char *filename) {
-   return NULL;
+    FILE *file=fopen(filename,"r");
+    char *line=NULL;
+    
+    size_t size=MAX_LINE_LEN;
+    bst_sf *bst_exec=NULL;
+    matrix_sf *res =NULL;
+
+    //loop through lines to get instructions and names
+    while(getline(&line,&size,file)!=-1){
+        //first char = matrix name, advance pointer past any spaces or =
+        char name=line[0];
+        char *p=(strchr(line,'=')+ 1);
+        while((*p == ' ')){
+            p++;
+        }
+        matrix_sf *evalu;
+        //if digit is first valid char, create matrix based on value
+        if (*p<='9'&&*p>='0'){
+            evalu=create_matrix_sf(name,p);
+        }
+        //must use bst, and its a formula to evaluate
+        else{
+            evalu=evaluate_expr_sf(name,p,bst_exec);
+        }
+        //insert new matrice into BST and then update res to most uptodate matrix
+        bst_exec=insert_bst_sf(evalu,bst_exec);
+        res=evalu;
+    }
+    matrix_sf *val_to_return=copy_matrix(res->num_rows,res->num_cols,res->values);
+    val_to_return-> name=res->name;
+    //free memory (buffer of getline, BST, matrices inside)
+    free(line);
+    fclose(file);
+    free_bst_sf(bst_exec);
+    return val_to_return;
+   
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // This is a utility function used during testing. Feel free to adapt the code to implement some of
 // the assignment. Feel equally free to ignore it.
