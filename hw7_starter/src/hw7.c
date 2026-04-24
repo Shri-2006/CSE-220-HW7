@@ -242,6 +242,17 @@ typedef struct{
     int up;
 }Stack;
 
+
+//helper for evaluate_expr_sf
+//push matrix into stack
+void m_pusher(Stack *s, matrix_sf *m){
+    s->arr[++s->up]=,;
+}
+//pop matrix from stack
+matrix_sf* m_pop(Stack *s){
+    return s->arr[s->up--];
+}
+
 matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
     //convert to postfix format and initialize empty stack
     char *post_format=infix2postfix_sf(expr);
@@ -253,22 +264,46 @@ matrix_sf* evaluate_expr_sf(char name, char *expr, bst_sf *root) {
         char c=post_format[i];
         //If P is there, push else if its transpose, push pop top element, create new matrix, and push new matrix into stack, else if * or +, pop top 2, create new matrix with sum, push into stack
         if(isupper(c)){
-            push(&s,c);
+            //using pointer from bst push matrix to stack
+            m_pusher(&s,find_bst_sf(c,root));
         }
         else if (c=='\''){
-            pop(&s);
-            push(transpose_mat_sf(s));
+            matrix_sf *first=m_pop(&s);
+            matrix_sf *res=transpose_mat_sf(first);
+            //remove ? matrix since they are temp
+            if(!isupper(first->name)){
+                free(first);
+            }
+            m_pusher(&s,res);
         }
         else if(c=='*'){
-            for(i=0;i<2;i++){
-                pop(&s);
+            //pop right, then left, multiply, then free the old mats and push new mat to s
+            matrix_sf *mat2=m_pop(&s);
+            matrix_sf *mat1=m_pop(&s);
+            matrix_sf *res=mult_mats_sf(mat1,mat2);
+            if(!isupper(mat1->name)){
+                free(mat1);
             }
-            push(add_mats_sf(s,s));
-            if(name=='?'){
-                free(s);
+            if(!isupper(mat2->name)){
+                free(mat2);
             }
-
+            m_pusher(&s,res);
         }
+        //same as *
+        else if(c=='+'){
+            //pop right, then left, multiply, then free the old mats and push new mat to s
+            matrix_sf *mat2=m_pop(&s);
+            matrix_sf *mat1=m_pop(&s);
+            matrix_sf *res=mult_mats_sf(mat1,mat2);
+            if(!isupper(mat1->name)){
+                free(mat1);
+            }
+            if(!isupper(mat2->name)){
+                free(mat2);
+            }
+            m_pusher(&s,res);
+        }
+        
         matrix_sf *result =pop(&s);
         res->name=name;
         free(post_format);
