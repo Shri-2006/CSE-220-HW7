@@ -129,6 +129,9 @@ matrix_sf* create_matrix_sf(char name, const char *expr) {
     //get dimensions through sscanf
     sscanf(expr,"%u %u",&num_rows,&num_cols);
     matrix_sf *res_mat= malloc(sizeof(matrix_sf)+(num_rows*num_cols*sizeof(int)));
+    if((res_mat)==NULL){
+        return NULL;
+    }
     res_mat->name=name;
     res_mat->num_rows=num_rows;
     res_mat->num_cols=num_cols;
