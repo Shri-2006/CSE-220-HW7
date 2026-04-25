@@ -545,6 +545,22 @@ Test(student_tests, eval_multi_test) {
     expect_matrices_equal(result, 7, 5, (int[]){-1976,-2470,3572,2774,1824,208,260,-376,-292,-192,2392,2990,-4324,-3358, -2208,-728,-910, 1316, 1022, 672,-5304, -6630, 9588, 7446,4896,-3744,-4680,6768,5256,3456,-1404,-1755,2538,1971,1296});
 }
 
+//reusing same matrix in eval should still work fine
+
+Test(student_tests, eval_adding_same_test) {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "A+A", root);
+    expect_matrices_equal(result, 3, 5, (int[]){-4*2,18*2,6*2,7*2,10*2,-14*2,29*2,8*2,2*21,-99*2,0,7*2,5*2,2*2,-9*2});
+}
+
+
+//adding and transposing a matrix
+Test(student_tests, eval_adding_then_transpose_test) {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "(A+A)'", root);
+    expect_matrices_equal(result, 5, 3, (int[]){-8,-28,0,36,58,14,12,16,10,14,42, 4,20,-198,-18});
+}
+
 
 
 //free_bst_sf same as unit_test, as directed by piazza because we cnanot create files that don't alreaedy exist
