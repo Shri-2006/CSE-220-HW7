@@ -510,9 +510,40 @@ Test(student_tests,inf2posconfusingexpression) {
 
 //evalulate expr sf tests
 
+//Single matrix expression test
+Test(student_tests, eval_first_test) {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "A", root);
+    expect_matrices_equal(result, 3, 5, (int[]){-4,18,6,7,10,-14,29,8,21,-99,0,7,5,2,-9});
+}
 
+//now adding matrice test
+Test(student_tests, eval_adding_test) {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "A+B", root);
+    expect_matrices_equal(result, 3, 5, (int[]){6,27,4,-26,32,30,39,20,93,-47,-88,24,21,16,-18});
+}
 
+//transposition test
 
+Test(student_tests, eval_transpose_test) {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "A'", root);
+    expect_matrices_equal(result, 5, 3, (int[]){-4,-14,0,18,29,7,6,8,5,7,21,2,10,-99,-9});
+}
+//reversing transposition
+Test(student_tests, eval_reverse_le_transpose_test) {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "A''", root);
+    expect_matrices_equal(result, 3, 5, (int[]){-4,18,6,7,10,-14,29,8,21 ,-99,0,7,5,2 ,-9});
+}
+
+//multiplication test, used matrix calculator from internet to calculate
+Test(student_tests, eval_multi_test) {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "G*H", root);
+    expect_matrices_equal(result, 7, 5, (int[]){-1976,-2470,3572,2774,1824,208,260,-376,-292,-192,2392,2990,-4324,-3358, -2208,-728,-910, 1316, 1022, 672,-5304, -6630, 9588, 7446,4896,-3744,-4680,6768,5256,3456,-1404,-1755,2538,1971,1296});
+}
 
 
 
@@ -532,3 +563,21 @@ Test(student_tests,free_bst3) {
 
 //copied some of the eval tests from unit just to test myself
 //copied execute_script_sf as according to piazza post @282
+/* evaluate_expr_sf tests*/
+Test(base_evaluate_expr, expr01_student_test_c, .description="Given root of a tree, evaluation of an expression") {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "G * C + F'", root);
+    expect_matrices_equal(result, 7, 4, (int[]){4597, -1765, 206, -5401, -512, 159, -15, 647, -5547, 2117, -104, 6407, 1720, -523, 199, -1962, 12587, -4696, 281, -14286, 8973, -3330, 436, -9965, 3439, -1138, 222, -3721});
+}
+
+Test(base_evaluate_expr, expr02_student_test_c, .description="Given root of a tree, evaluation of an expression") {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "(A + B) * H' * D", root);
+    expect_matrices_equal(result, 3, 4, (int[]){-32848, 250466, 277155, 219671, 37088, -282796, -312930, -248026, 84704, -645868, -714690, -566458});
+}
+
+Test(base_evaluate_expr, expr03_student_test_c, .description="Given root of a tree, evaluation of an expression") {
+    bst_sf* root = build_bst();
+    matrix_sf* result = evaluate_expr_sf('R', "(I + D' * C) * E' * J", root);
+    expect_matrices_equal(result, 4, 3, (int[]){-11171376, 56535582, 3236371, 69463160, -416294603, -47900609, 76095851, -459940949, -56668593, 60848961, -362841916, -37213021});
+}
