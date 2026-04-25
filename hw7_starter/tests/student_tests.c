@@ -608,8 +608,8 @@ Test(base_evaluate_expr, expr03_student_test_c, .description="Given root of a tr
 Test(base_execute, add_mats01stu) { run_script_without_valgrind("script01"); }
 Test(base_execute_valgrind, add_mats01stu) { expect_no_valgrind_errors(run_script_with_valgrind("script01")); }
 
-//Test(base_execute, add_mats02stu) { run_script_without_valgrind("script02"); }
-//Test(base_execute_valgrind, add_mats02stu) { expect_no_valgrind_errors(run_script_with_valgrind("script02")); }
+Test(base_execute, add_mats0s2stu) { run_script_without_valgrind("script02"); }
+Test(base_execute_valgrind, add_matsss02stu) { expect_no_valgrind_errors(run_script_with_valgrind("script02")); }
 
 Test(base_execute, mult_matsstu0) { run_script_without_valgrind("script03"); }
 Test(base_execute_valgrind, mult_mats01stu) { expect_no_valgrind_errors(run_script_with_valgrind("script03")); }

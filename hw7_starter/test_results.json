@@ -1,6 +1,6 @@
 {
   "id": "Criterion v2.4.1",
-  "passed": 159,
+  "passed": 161,
   "failed": 0,
   "errored": 0,
   "skipped": 0,
@@ -18,18 +18,23 @@
           "status": "PASSED"
         },
         {
-          "name": "twobytwomat_create",
+          "name": "twobytwomat_create_neg",
           "assertions": 4,
           "status": "PASSED"
         },
         {
-          "name": "twobytwomat_create_neg",
+          "name": "twobytwomat_create",
           "assertions": 4,
           "status": "PASSED"
         },
         {
           "name": "subtraction_of_2by2",
           "assertions": 3,
+          "status": "PASSED"
+        },
+        {
+          "name": "paren_precendencetwo_order",
+          "assertions": 1,
           "status": "PASSED"
         },
         {
@@ -40,11 +45,6 @@
         {
           "name": "onebyonemultiplication",
           "assertions": 3,
-          "status": "PASSED"
-        },
-        {
-          "name": "paren_precendencetwo_order",
-          "assertions": 1,
           "status": "PASSED"
         },
         {
@@ -73,12 +73,12 @@
           "status": "PASSED"
         },
         {
-          "name": "neg_mult_mat",
+          "name": "mult_test_zero_mat",
           "assertions": 3,
           "status": "PASSED"
         },
         {
-          "name": "mult_test_zero_mat",
+          "name": "neg_mult_mat",
           "assertions": 3,
           "status": "PASSED"
         },
@@ -93,13 +93,13 @@
           "status": "PASSED"
         },
         {
-          "name": "mult_for_intopos",
-          "assertions": 1,
+          "name": "mult_test_dot_mat",
+          "assertions": 3,
           "status": "PASSED"
         },
         {
-          "name": "mult_test_dot_mat",
-          "assertions": 3,
+          "name": "mult_for_intopos",
+          "assertions": 1,
           "status": "PASSED"
         },
         {
@@ -118,12 +118,12 @@
           "status": "PASSED"
         },
         {
-          "name": "long_other_transpose",
+          "name": "long_col_mat_add",
           "assertions": 3,
           "status": "PASSED"
         },
         {
-          "name": "long_col_mat_add",
+          "name": "long_other_transpose",
           "assertions": 3,
           "status": "PASSED"
         },
@@ -188,12 +188,12 @@
           "status": "PASSED"
         },
         {
-          "name": "free_bst2",
+          "name": "free_bst1",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "free_bst1",
+          "name": "free_bst2",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -208,12 +208,12 @@
           "status": "PASSED"
         },
         {
-          "name": "eval_multi_test",
+          "name": "eval_first_test",
           "assertions": 3,
           "status": "PASSED"
         },
         {
-          "name": "eval_first_test",
+          "name": "eval_multi_test",
           "assertions": 3,
           "status": "PASSED"
         },
@@ -238,13 +238,13 @@
           "status": "PASSED"
         },
         {
-          "name": "adding_1by1s",
-          "assertions": 3,
+          "name": "adding_fori2p",
+          "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "adding_fori2p",
-          "assertions": 1,
+          "name": "adding_1by1s",
+          "assertions": 3,
           "status": "PASSED"
         },
         {
@@ -267,12 +267,12 @@
           "status": "PASSED"
         },
         {
-          "name": "trans01",
+          "name": "mult02",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "mult02",
+          "name": "trans01",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -282,12 +282,12 @@
           "status": "PASSED"
         },
         {
-          "name": "add02",
+          "name": "add01",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "add01",
+          "name": "add02",
           "assertions": 1,
           "status": "PASSED"
         }
@@ -321,12 +321,12 @@
           "status": "PASSED"
         },
         {
-          "name": "add02",
+          "name": "add01",
           "assertions": 3,
           "status": "PASSED"
         },
         {
-          "name": "add01",
+          "name": "add02",
           "assertions": 3,
           "status": "PASSED"
         }
@@ -345,12 +345,12 @@
           "status": "PASSED"
         },
         {
-          "name": "insert_bst02",
+          "name": "insert_bst01",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "insert_bst01",
+          "name": "insert_bst02",
           "assertions": 1,
           "status": "PASSED"
         }
@@ -435,7 +435,7 @@
     },
     {
       "name": "base_execute_valgrind",
-      "passed": 39,
+      "passed": 40,
       "failed": 0,
       "errored": 0,
       "skipped": 0,
@@ -446,12 +446,12 @@
           "status": "PASSED"
         },
         {
-          "name": "trans_mat03",
+          "name": "trans_mat03stu",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "trans_mat03stu",
+          "name": "trans_mat03",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -611,17 +611,7 @@
           "status": "PASSED"
         },
         {
-          "name": "add_mats03",
-          "assertions": 1,
-          "status": "PASSED"
-        },
-        {
-          "name": "add_mats03stu",
-          "assertions": 1,
-          "status": "PASSED"
-        },
-        {
-          "name": "add_mats01",
+          "name": "add_matsss02stu",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -631,7 +621,22 @@
           "status": "PASSED"
         },
         {
+          "name": "add_mats03stu",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
+          "name": "add_mats03",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
           "name": "add_mats01stu",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
+          "name": "add_mats01",
           "assertions": 1,
           "status": "PASSED"
         }
@@ -639,18 +644,18 @@
     },
     {
       "name": "base_execute",
-      "passed": 39,
+      "passed": 40,
       "failed": 0,
       "errored": 0,
       "skipped": 0,
       "tests": [
         {
-          "name": "trans_matstu01",
+          "name": "trans_mat03stu",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "trans_mat03stu",
+          "name": "trans_matstu01",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -670,7 +675,7 @@
           "status": "PASSED"
         },
         {
-          "name": "trans_mat01",
+          "name": "scriptstu20",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -680,7 +685,7 @@
           "status": "PASSED"
         },
         {
-          "name": "scriptstu20",
+          "name": "trans_mat01",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -710,6 +715,11 @@
           "status": "PASSED"
         },
         {
+          "name": "script19",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
           "name": "script1stu7",
           "assertions": 1,
           "status": "PASSED"
@@ -720,22 +730,7 @@
           "status": "PASSED"
         },
         {
-          "name": "script19",
-          "assertions": 1,
-          "status": "PASSED"
-        },
-        {
           "name": "script18",
-          "assertions": 1,
-          "status": "PASSED"
-        },
-        {
-          "name": "script15",
-          "assertions": 1,
-          "status": "PASSED"
-        },
-        {
-          "name": "script17",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -745,7 +740,7 @@
           "status": "PASSED"
         },
         {
-          "name": "script14",
+          "name": "script17",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -755,17 +750,27 @@
           "status": "PASSED"
         },
         {
+          "name": "script15",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
+          "name": "script14",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
           "name": "script12",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "script11",
+          "name": "script11stu",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "script11stu",
+          "name": "script11",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -795,12 +800,12 @@
           "status": "PASSED"
         },
         {
-          "name": "mult_mats03",
+          "name": "mult_mats03_stustu",
           "assertions": 1,
           "status": "PASSED"
         },
         {
-          "name": "mult_mats03_stustu",
+          "name": "mult_mats03",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -810,7 +815,22 @@
           "status": "PASSED"
         },
         {
+          "name": "add_mats0stu3",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
           "name": "mult_mats01",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
+          "name": "add_mats0s2stu",
+          "assertions": 1,
+          "status": "PASSED"
+        },
+        {
+          "name": "add_mats02",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -820,17 +840,7 @@
           "status": "PASSED"
         },
         {
-          "name": "add_mats0stu3",
-          "assertions": 1,
-          "status": "PASSED"
-        },
-        {
           "name": "add_mats01stu",
-          "assertions": 1,
-          "status": "PASSED"
-        },
-        {
-          "name": "add_mats02",
           "assertions": 1,
           "status": "PASSED"
         },
@@ -854,22 +864,22 @@
           "status": "PASSED"
         },
         {
-          "name": "expr02_student_test_c",
-          "assertions": 3,
-          "status": "PASSED"
-        },
-        {
-          "name": "expr01_student_test_c",
-          "assertions": 3,
-          "status": "PASSED"
-        },
-        {
           "name": "expr03",
           "assertions": 3,
           "status": "PASSED"
         },
         {
+          "name": "expr02_student_test_c",
+          "assertions": 3,
+          "status": "PASSED"
+        },
+        {
           "name": "expr02",
+          "assertions": 3,
+          "status": "PASSED"
+        },
+        {
+          "name": "expr01_student_test_c",
           "assertions": 3,
           "status": "PASSED"
         },
